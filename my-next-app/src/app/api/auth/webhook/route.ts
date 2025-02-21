@@ -1,6 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import { saveUserToDB } from '@/actions/users'
 
 export async function POST(req: Request) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -49,8 +50,20 @@ export async function POST(req: Request) {
   // For this guide, log payload to console
   const { id } = evt.data
   const eventType = evt.type
-  console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
+  console.log(`Received webhook with ID ${id} and event type of ${eventType}`).trim(),
   console.log('Webhook payload:', body)
+
+
+
+  if (eventType === "user.created"){
+    const newUser = {
+        clerkId: evt.data.id,
+        fullname: `${evt.data.first_name ?? ""} ${evt.data.last_name ?? ""}`,
+        type: "default"
+    }
+
+    await saveUserToDB(newUser);
+  }
 
   return new Response('Webhook received', { status: 200 })
 }
