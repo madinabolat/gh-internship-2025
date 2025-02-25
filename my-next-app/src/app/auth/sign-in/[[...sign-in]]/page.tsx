@@ -9,19 +9,15 @@ export default function SignInPage() {
   const { isSignedIn } = useAuth()
   const router = useRouter()
 
+  console.log("SignInPage render - isSignedIn:", isSignedIn);
+
   useEffect(() => {
+    console.log("useEffect triggered - isSignedIn:", isSignedIn);
     if (isSignedIn) {
+      console.log("User is signed in. Redirecting to /dashboard.");
       router.push('/dashboard')
     }
   }, [isSignedIn, router]) // Include router in dependencies
 
   return <SignIn />
 }
-
-// "use client"
-
-// import { SignIn } from '@clerk/nextjs'
-
-// export default function SignInPage() {
-//   return <SignIn afterSignInUrl="/dashboard" />
-// }
