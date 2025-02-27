@@ -14,16 +14,20 @@ export default function Sidebar() {
     }
     return (
     <div className={`${isCollapsed ? "w-16": "w-64"}`}>
-        {/* <p>toggle is {isCollapsed ? "Collapsed":"Expanded"}</p> */}
-        <button 
-        onClick={toggleCollapse}>
-        {isCollapsed? <RiCloseLine size = {24}/> :  
-        <div className="flex items-center gap-2">
-        <span>MailGenie</span>
-        {isCollapsed ? <RiCloseLine size={24} /> : <RiMenuLine size={24} />}
-      </div>
+        <button onClick={toggleCollapse} >
+        {
+            isCollapsed ? 
+            (<RiCloseLine size = {24}/>) 
+            :  
+            (
+                <div className="flex items-center gap-2">
+                <span>MailGenie</span>
+                <RiMenuLine size={24} />
+                </div>
+            )
         }
         </button> 
+
         <ul>
             <li>
                 <Link href="/dashboard">{isCollapsed ? <HiOutlineViewGrid size = {24}/>: "Dashboard"}</Link>
