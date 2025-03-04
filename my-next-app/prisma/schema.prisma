@@ -23,7 +23,7 @@ model User {
   campaigns Campaign[]
   domains   Domain[]
 }
-
+//Add Subscriptions? 
 model Billings {
   id       String @id @default(uuid())
   plan     String
@@ -31,6 +31,20 @@ model Billings {
   userId   String
   user     User   @relation(fields: [userId], references: [id])
 }
+
+// model Subscription {
+//   id         String  @id @default(uuid())
+//   userId     String  @unique
+//   maxDomains Int     @default(1) // Set a default limit
+//   user       User    @relation(fields: [userId], references: [id])
+// }
+// model Subscription {
+//   id         String  @id @default(uuid())
+//   userId     String  @unique
+//   maxDomains Int     @default(3) // Adjust this default
+//   user       User    @relation(fields: [userId], references: [id])
+//   billingId  String  @unique
+//   billing    Billings @relation(fields: [billingId], references: [id])
 
 model Campaign {
   id         String   @id @default(uuid())
