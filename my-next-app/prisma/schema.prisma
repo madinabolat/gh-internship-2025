@@ -23,7 +23,7 @@ model User {
   campaigns Campaign[]
   domains   Domain[]
 }
-//Add Subscriptions? 
+
 model Billings {
   id       String @id @default(uuid())
   plan     String
